@@ -10,6 +10,21 @@
 using namespace std;
 #include"Ant.h"
 
+void Ant::random_position(const int& size){
+    srand(static_cast<unsigned int>(time(0)));
+    int pos=rand()%(size*size);//初始化蚂蚁一开始所在的位置
+x=pos/size;//行数
+y=pos%size-1;//列数
+}
+void Ant::Setheading(int h){
+    heading=Dire[h];
+    tailheading=Dire[3-h];
+}
+void Ant::random_towards(){
+    srand(static_cast<unsigned int>(time(0)));
+    int turn=rand()%4;
+   Setheading(turn);
+};
 void Ant::Moveforward(){
    switch(heading)
    {case Up:
@@ -77,10 +92,8 @@ void Ant::Movebackward(){
     }
 }
 }
-void Ant::Setheading(int h){
-    heading=Dire[h];
-    tailheading=Dire[3-h];
-}
+
+
 void Ant::Move_straight(vector<vector<char>> map,int step){
     while(step--){
     if (map[x][y]=='#')//蚂蚁当前处在黑格时
